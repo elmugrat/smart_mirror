@@ -1,0 +1,42 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+html, body {
+	background: #000000;
+	color: white;
+	font-family: 'Titillium Web', sans-serif;
+	font-size: 18pt;
+	font-weight: 200;
+}
+
+div#datetime {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+div#weather {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+div#message {
+	position: absolute;
+	left: 0;
+	top: 42%;
+	width: 100%;
+	padding: 0 200px;
+	font-size: 48pt;
+	text-align: center;
+}

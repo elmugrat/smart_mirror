@@ -1,0 +1,44 @@
+div#datetime {
+	width: 250px;
+	text-align: center;
+}
+
+div#time {
+	width: 100%;
+	font-size: 77pt;	
+	line-height: 77pt;
+}
+
+div#date {
+	margin: 10px 0 10px 0;
+	padding-top: 10px;
+	font-size: 16pt;
+	border-top: 1px solid #888;
+}
+
+div.haltestelle {
+	width: 100%;
+	margin-top: 2px;
+	padding-top: 2px;
+	font-size: 8pt;
+	text-align: left;
+	border-top: 1px solid #888;
+}
+
+div.haltestelle span {
+	display: inline-block;
+	width: 100px;
+	margin-left: 5px;
+	float: left;
+}
+
+div.haltestelle ul {
+	overflow: hidden;
+	list-style: none;
+}
+
+div.haltestelle li {
+	float: left;
+	width: 46px;
+	text-align: right;
+}

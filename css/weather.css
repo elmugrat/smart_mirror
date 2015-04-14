@@ -1,0 +1,75 @@
+div#weather {
+	width: 250px;
+	text-align: center;
+	vertical-align: bottom;
+}
+
+div#weather_now {
+	border-bottom: 1px solid white;
+}
+
+div#weather_now_desc {
+	width: 100%;
+	margin-bottom: 10px;
+	font-size: 12pt;
+	line-height: 48px;
+}
+
+div#weather_now img {
+	width: 80px;
+	margin: 0 85px;
+}
+
+div.weather_forecast {
+	overflow: hidden;	
+	padding: 0 5px;
+	font-size: 10pt;
+	line-height: 22px;
+	text-align: left;
+	border-bottom: 1px solid white;
+}
+
+div.weather_forecast_hourly {
+	padding-left: 30px;
+	border-bottom: none;
+}
+
+div.weather_forecast_hourly#weather_forecast_hour2400 {
+	border-bottom: 1px solid white;
+}
+
+div.weather_forecast div {
+	display: inline-block;
+	padding: 2px 0;
+}
+
+div.weather_forecast_text {
+	float: left;
+}
+
+div.weather_forecast_temp {
+	margin-right: 56px;
+}
+
+div.weather_forecast_temp, div.weather_forecast_tempMax {
+	float: right;
+	width: 50px;
+	font-size: 10pt;
+	text-align: right;
+}
+
+div.weather_forecast_tempMin {
+	float: right;
+	width: 50px;
+	margin-left: 2px;
+	font-size: 8pt;
+	vertical-align: bottom;
+	color: #888;
+	text-align: left;
+}
+
+img.weather_forecast_img {
+	float: right;
+	width: 20px;
+	margin: 5px 0 2px 0;
+}
