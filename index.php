@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href='http://fonts.googleapis.com/css?family=Titillium+Web:300,200' rel='stylesheet' type='text/css'>
 	<link href="css/mirror.css" rel='stylesheet' type='text/css'>
 	<link href="css/datetime.css" rel='stylesheet' type='text/css'>
 	<link href="css/weather.css" rel='stylesheet' type='text/css'>
@@ -44,12 +43,12 @@
 				}
 			});
 
-			setTimout(autoUpdate, 60000);
+			setTimeout(autoUpdate, 300000);
 		}
 
 		function setDateTime() {
 			$('#time').html(moment().format('HH:mm'));
-			$('#date').html(moment().format('dddd [, der ] L'));
+			$('#date').html(moment().format('dddd[, der ] L'));
 
 			setTimeout(setDateTime, 5000);
 		}
@@ -74,9 +73,9 @@
 		<div id="time"></div>
 		<div id="date"></div>
 		<div id="opnv">
-			<div class="haltestelle" id="bindestr_rathaus"><span>M3 &#8594; Rathaus</span><ul></ul></div>
-			<div class="haltestelle" id="gliesmaroderstr_uni"><span>M19 &#8594; Uni</span><ul></ul></div>
-			<div class="haltestelle" id="gliesmaroderstr_hbf"><span>M29 &#8594; Hbf</span><ul></ul></div>
+			<div class="haltestelle" id="bindestr_rathaus"><div>M3 <span>&#10143;</span> Rathaus</div><ul></ul></div>
+			<div class="haltestelle" id="gliesmaroderstr_uni"><div>M19 <span>&#10143;</span> Uni</div><ul></ul></div>
+			<div class="haltestelle" id="gliesmaroderstr_hbf"><div>M29 <span>&#10143;</span> Hbf</div><ul></ul></div>
 		</div>
 	</div>
 	

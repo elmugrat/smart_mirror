@@ -30,6 +30,8 @@ function refreshDepartures() {
 	removeFirstExpiredLi('gliesmaroderstr_uni', 'M19', getNextDepartures(fahrplan.gliesmaroderstr_uni.M19));
 	
 	removeFirstExpiredLi('gliesmaroderstr_hbf', 'M29', getNextDepartures(fahrplan.gliesmaroderstr_hbf.M29));
+
+	setTimeout(refreshDepartures, 60000);
 }
 
 function removeFirstExpiredLi(targetDivId, transitLineName, nextDepartures) {	

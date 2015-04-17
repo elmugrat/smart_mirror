@@ -1,18 +1,26 @@
+@import url(http://fonts.googleapis.com/css?family=Alegreya+Sans:400,300);
+
 div#datetime {
 	width: 250px;
 	text-align: center;
 }
 
+div#time, div#date {
+	font-family: 'Alegreya Sans' sans-serif;
+}
+
 div#time {
 	width: 100%;
-	font-size: 77pt;	
-	line-height: 77pt;
+	font-size: 72pt;	
+	font-weight: 300;
+	line-height: 72pt;
 }
 
 div#date {
 	margin: 10px 0 10px 0;
 	padding-top: 10px;
 	font-size: 16pt;
+	font-weight: 400;
 	border-top: 1px solid #888;
 }
 
@@ -20,16 +28,21 @@ div.haltestelle {
 	width: 100%;
 	margin-top: 2px;
 	padding-top: 2px;
-	font-size: 8pt;
+	font-size: 9pt;
 	text-align: left;
 	border-top: 1px solid #888;
 }
 
-div.haltestelle span {
+div.haltestelle div {
 	display: inline-block;
 	width: 100px;
 	margin-left: 5px;
+	line-height: 14px;
 	float: left;
+}
+
+div.haltestelle div span {
+	font-size: 12pt;
 }
 
 div.haltestelle ul {
@@ -39,6 +52,7 @@ div.haltestelle ul {
 
 div.haltestelle li {
 	float: left;
-	width: 46px;
-	text-align: right;
+	width: 45px;
+	padding-left: 15px;
+	text-align: left;
 }
