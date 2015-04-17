@@ -37,12 +37,13 @@ div.haltestelle div {
 	display: inline-block;
 	width: 100px;
 	margin-left: 5px;
-	line-height: 14px;
+	line-height: 15px;
 	float: left;
 }
 
 div.haltestelle div span {
 	font-size: 12pt;
+	vertical-align: bottom;
 }
 
 div.haltestelle ul {
