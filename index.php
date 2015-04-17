@@ -33,6 +33,7 @@
 
 			refreshWeather();
 
+			autoUpdate();
 		});
 
 		function autoUpdate() {
@@ -43,7 +44,7 @@
 				}
 			});
 
-			setTimout(autoUpdate, 600000);
+			setTimout(autoUpdate, 60000);
 		}
 
 		function setDateTime() {
