@@ -21,30 +21,15 @@
 		    }
 		});
 		
-		var currentGitHash = '<?php echo trim(`git rev-parse HEAD`) ?>';
-
 		$(function() {
 			setDateTime();
 
-			$('#testbutton').click(refreshDepartures);
+			setMessageText();
 
 			refreshDepartures();
 
 			refreshWeather();
-
-			autoUpdate();
 		});
-
-		function autoUpdate() {
-			$.getJSON('gitHash.php', {}, function(json, _status) {
-				if (json && json.latestGitHash != currentGitHash) {
-					window.location.reload();
-                    window.location.href=window.location.href;
-				}
-			});
-
-			setTimeout(autoUpdate, 300000);
-		}
 
 		function setDateTime() {
 			$('#time').html(moment().format('HH:mm'));
@@ -52,22 +37,20 @@
 
 			setTimeout(setDateTime, 5000);
 		}
+		
+		function setMessageText() {
+			$.getJSON('message.php?action=get', {}, function(json, _status) {
+				if (json) {
+					$('#message h1').html(json.message);
+				}
+			});
+			
+			setTimeout(setMessageText, 60000);
+		}
 	</script>
-	<style type='text/css'>
-	#testbutton {
-		display: block;
-		width: 200px;
-		margin: 15px;
-		padding: 15px;
-		text-align: center;
-		border: 1px solid green;
-	}
-	</style>
 </head>
 <body>
-	<!--<div id="testbutton">click me</div>-->
-	
-	<div id="message"></div>
+	<div id="message"><h1></h1></div>
 	
 	<div id="datetime">
 		<div id="time"></div>
