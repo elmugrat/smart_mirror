@@ -1,118 +1,99 @@
+<?php
+switch ($_GET['action']) {
+	case 'get':
+		echo json_encode(array('message' => trim(`cat message.txt`)));
+		return;
+	case 'set':
+		shell_exec('/bin/echo -n ' . escapeshellarg($_POST['message']) . ' > message.txt');
+		break;
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="css/mirror.css" rel='stylesheet' type='text/css'>
-	<link href="css/datetime.css" rel='stylesheet' type='text/css'>
-	<link href="css/weather.css" rel='stylesheet' type='text/css'>
-	
-	<script src='js/jquery-2.1.3.min.js'></script>
-	<script src='js/moment-with-locales.min.js'></script>
-	<script src='js/forecast.io.js'></script>
-	<script src='js/fahrplan.js'></script>
-	<script type='text/javascript'>
-		moment.locale('de', {
-		    calendar : {
-		        lastDay : '[gestern, der] D. MMMM',
-		        sameDay : '[heute, der] D. MMMM',
-		        nextDay : '[morgen, der] D. MMMM',
-		        lastWeek : '[letzte Woche] dd[, der] D. MMMM',
-		        nextWeek : 'dd[, der] D. MMMM',
-		        sameElse : 'L'
-		    }
-		});
-		
-		$(function() {
-			setDateTime();
-
-			setMessageText();
-
-			refreshDepartures();
-
-			refreshWeather();
-		});
-
-		function setDateTime() {
-			$('#time').html(moment().format('HH:mm'));
-			$('#date').html(moment().format('dddd[, der ] L'));
-
-			setTimeout(setDateTime, 5000);
-		}
-		
-		function setMessageText() {
-			$.getJSON('message.php?action=get', {}, function(json, _status) {
-				if (json) {
-					$('#message h1').html(json.message);
-				}
-			});
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+	<title>Smart Mirror: Message</title>	
+	<style type='text/css'>
+	* {
+		margin:0;
+		padding:0;
 			
-			setTimeout(setMessageText, 60000);
+		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+	}
+	
+	html {
+	    height:100%;
+	}
+	
+	body {
+		background: -moz-radial-gradient(center, ellipse cover,  rgba(30,47,84,0.9) 0%, rgba(30,47,84,1) 100%);
+		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(30,47,84,0.9)), color-stop(100%,rgba(30,47,84,1)));
+		background: -webkit-radial-gradient(center, ellipse cover,  rgba(30,47,84,0.9) 0%,rgba(30,47,84,1) 100%);
+		background: -o-radial-gradient(center, ellipse cover,  rgba(30,47,84,0.9) 0%,rgba(30,47,84,1) 100%);
+		background: -ms-radial-gradient(center, ellipse cover,  rgba(30,47,84,0.9) 0%,rgba(30,47,84,1) 100%);
+		background: radial-gradient(ellipse at center,  rgba(30,47,84,0.9) 0%,rgba(30,47,84,1) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e61e2f54', endColorstr='#1e2f54',GradientType=1 );
+	}
+	
+	form {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 40%;
+		transform: translate(-50%, -50%);
+		-webkit-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+	}
+
+	input {
+		width: 100%;
+		padding: 8px 0;
+		text-indent: 10px;
+		font-size: 16px;
+		outline: 0;
+		background: #FFF;
+		border: 1px solid #CCC;
+		border-radius: 5px;
+		box-shadow: inset 0 1px 3px #CCC, 0px 0px 3px #CCC;
+	}
+	
+	*::-webkit-input-placeholder {
+		color: #888;
+	}
+	*:-moz-placeholder {
+	    color: #888;
+	    opacity: 1
+	}
+	*::-moz-placeholder {
+	    color: #888;
+	    opacity: 1
+	}
+	*:-ms-input-placeholder {
+	    color: #888;
+	}
+	
+	/* Smartphones (portrait and landscape) ----------- */
+	@media only screen
+	and (min-device-width : 320px) 
+	and (max-device-width : 480px) {
+		form { 
+			width: 90%; 
+			top: 20%;
 		}
-	</script>
+	}
+ 
+	/* iPads (portrait and landscape) ----------- */
+	@media only screen
+	and (min-device-width : 768px) 
+	and (max-device-width : 1024px) {
+		form { width: 70%; }
+	}
+	</style>
 </head>
 <body>
-	<div id="message"><h1></h1></div>
-	
-	<div id="datetime">
-		<div id="time"></div>
-		<div id="date"></div>
-		<div id="opnv">
-			<div class="haltestelle" id="bindestr_rathaus"><div>M3 <span>&#10143;</span> Rathaus</div><ul></ul></div>
-			<div class="haltestelle" id="gliesmaroderstr_uni"><div>M19 <span>&#10143;</span> Uni</div><ul></ul></div>
-			<div class="haltestelle" id="gliesmaroderstr_hbf"><div>M29 <span>&#10143;</span> Hbf</div><ul></ul></div>
-		</div>
-	</div>
-	
-	<div id="weather">
-		<div id="weather_now">
-			<img id="weather_now_img" />
-			<div id="weather_now_desc"></div>
-		</div>
-		
-		<div class="weather_forecast weather_forecast_hourly" id="weather_forecast_hour0600">
-			<div class="weather_forecast_text">06:00</div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_temp"></div>
-		</div>
-		<div class="weather_forecast weather_forecast_hourly" id="weather_forecast_hour1200">
-			<div class="weather_forecast_text">12:00</div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_temp"></div>
-		</div>
-		<div class="weather_forecast weather_forecast_hourly" id="weather_forecast_hour1800">
-			<div class="weather_forecast_text">18:00</div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_temp"></div>
-		</div>
-		<div class="weather_forecast weather_forecast_hourly" id="weather_forecast_hour2400">
-			<div class="weather_forecast_text">24:00</div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_temp"></div>
-		</div>
-		
-		<div class="weather_forecast weather_forecast_daily" id="weather_forecast_day1">
-			<div class="weather_forecast_text"></div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_tempMin"></div>
-			<div class="weather_forecast_tempMax"></div>
-		</div>
-		<div class="weather_forecast weather_forecast_daily" id="weather_forecast_day2">
-			<div class="weather_forecast_text"></div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_tempMin"></div>
-			<div class="weather_forecast_tempMax"></div>
-		</div>
-		<div class="weather_forecast weather_forecast_daily" id="weather_forecast_day3">
-			<div class="weather_forecast_text"></div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_tempMin"></div>
-			<div class="weather_forecast_tempMax"></div>
-		</div>
-		<div class="weather_forecast weather_forecast_daily" id="weather_forecast_day4">
-			<div class="weather_forecast_text"></div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_tempMin"></div>
-			<div class="weather_forecast_tempMax"></div>
-		</div>
-	</div>
+	<form action='message.php?action=set' method='post'>
+		<input type='text' name='message' placeholder='Message' autofocus >
+	</form>
 </body>
 </html>
