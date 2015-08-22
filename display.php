@@ -39,7 +39,7 @@
 		}
 		
 		function setMessageText() {
-			$.getJSON('message.php?action=get', {}, function(json, _status) {
+			$.getJSON('index.php?action=get', {}, function(json, _status) {
 				if (json) {
 					$('#message h1').html(json.message);
 				}

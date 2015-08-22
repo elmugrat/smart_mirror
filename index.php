@@ -92,7 +92,7 @@ switch ($_GET['action']) {
 	</style>
 </head>
 <body>
-	<form action='message.php?action=set' method='post'>
+	<form action='index.php?action=set' method='post'>
 		<input type='text' name='message' placeholder='Message' autofocus >
 	</form>
 </body>
