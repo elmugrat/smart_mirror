@@ -34,7 +34,7 @@ div.weather_forecast_hourly {
 	border-bottom: none;
 }
 
-div.weather_forecast_hourly#weather_forecast_hour2400 {
+div.weather_forecast_hourly.last {
 	border-bottom: 1px solid white;
 }
 

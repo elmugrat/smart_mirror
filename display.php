@@ -10,16 +10,7 @@
 	<script src='js/forecast.io.js'></script>
 	<script src='js/fahrplan.js'></script>
 	<script type='text/javascript'>
-		moment.locale('de', {
-		    calendar : {
-		        lastDay : '[gestern, der] D. MMMM',
-		        sameDay : '[heute, der] D. MMMM',
-		        nextDay : '[morgen, der] D. MMMM',
-		        lastWeek : '[letzte Woche] dd[, der] D. MMMM',
-		        nextWeek : 'dd[, der] D. MMMM',
-		        sameElse : 'L'
-		    }
-		});
+		moment.locale('de');
 		
 		$(function() {
 			setDateTime();
@@ -68,23 +59,18 @@
 			<div id="weather_now_desc"></div>
 		</div>
 		
-		<div class="weather_forecast weather_forecast_hourly" id="weather_forecast_hour0600">
-			<div class="weather_forecast_text">06:00</div>
+		<div class="weather_forecast weather_forecast_hourly" id="weather_forecast_hour1">
+			<div class="weather_forecast_text"></div>
 			<img class="weather_forecast_img" />
 			<div class="weather_forecast_temp"></div>
 		</div>
-		<div class="weather_forecast weather_forecast_hourly" id="weather_forecast_hour1200">
-			<div class="weather_forecast_text">12:00</div>
+		<div class="weather_forecast weather_forecast_hourly" id="weather_forecast_hour2">
+			<div class="weather_forecast_text"></div>
 			<img class="weather_forecast_img" />
 			<div class="weather_forecast_temp"></div>
 		</div>
-		<div class="weather_forecast weather_forecast_hourly" id="weather_forecast_hour1800">
-			<div class="weather_forecast_text">18:00</div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_temp"></div>
-		</div>
-		<div class="weather_forecast weather_forecast_hourly" id="weather_forecast_hour2400">
-			<div class="weather_forecast_text">24:00</div>
+		<div class="weather_forecast weather_forecast_hourly last" id="weather_forecast_hour3">
+			<div class="weather_forecast_text"></div>
 			<img class="weather_forecast_img" />
 			<div class="weather_forecast_temp"></div>
 		</div>
@@ -102,12 +88,6 @@
 			<div class="weather_forecast_tempMax"></div>
 		</div>
 		<div class="weather_forecast weather_forecast_daily" id="weather_forecast_day3">
-			<div class="weather_forecast_text"></div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_tempMin"></div>
-			<div class="weather_forecast_tempMax"></div>
-		</div>
-		<div class="weather_forecast weather_forecast_daily" id="weather_forecast_day4">
 			<div class="weather_forecast_text"></div>
 			<img class="weather_forecast_img" />
 			<div class="weather_forecast_tempMin"></div>
