@@ -8,6 +8,9 @@ function refreshWeather() {
 	$.ajax({
 		dataType: 'jsonp',
 		url: apiUrl, 
+		error: function(data) {
+			setTimeout(refreshWeather, 300000); // if something goes wrong, try again in 5mins
+		},
 		success: function(data) {
 			//console.log(data);
 
