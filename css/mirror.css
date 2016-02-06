@@ -34,6 +34,12 @@ div#weather {
 	right: 0;
 }
 
+div#news {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
 div#message {
 	display: block;
 	position: absolute;

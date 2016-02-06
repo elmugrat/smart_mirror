@@ -3,15 +3,17 @@
 <head>
 	<link href="css/mirror.css" rel='stylesheet' type='text/css'>
 	<link href="css/datetime.css" rel='stylesheet' type='text/css'>
+	<link href="css/news.css" rel='stylesheet' type='text/css'>
 	<link href="css/weather.css" rel='stylesheet' type='text/css'>
-	
+
 	<script src='js/jquery-2.1.3.min.js'></script>
 	<script src='js/moment-with-locales.min.js'></script>
 	<script src='js/forecast.io.js'></script>
 	<script src='js/fahrplan.js'></script>
+	<script src='js/news.js'></script>
 	<script type='text/javascript'>
 		moment.locale('de');
-		
+
 		$(function() {
 			setDateTime();
 
@@ -20,6 +22,8 @@
 			refreshDepartures();
 
 			refreshWeather();
+
+      showNews();
 		});
 
 		function setDateTime() {
@@ -28,21 +32,21 @@
 
 			setTimeout(setDateTime, 5000);
 		}
-		
+
 		function setMessageText() {
 			$.getJSON('index.php?action=get', {}, function(json, _status) {
 				if (json) {
 					$('#message h1').html(json.message);
 				}
 			});
-			
+
 			setTimeout(setMessageText, 60000);
 		}
 	</script>
 </head>
 <body>
 	<div id="message"><h1></h1></div>
-	
+
 	<div id="datetime">
 		<div id="time"></div>
 		<div id="date"></div>
@@ -52,13 +56,15 @@
 			<div class="haltestelle" id="gliesmaroderstr_hbf"><div>M29 <span>&#10143;</span> Hbf</div><ul></ul></div>
 		</div>
 	</div>
-	
+
+  <div id="news"></div>
+
 	<div id="weather">
 		<div id="weather_now">
 			<img id="weather_now_img" />
 			<div id="weather_now_desc"></div>
 		</div>
-		
+
 		<div class="weather_forecast weather_forecast_hourly" id="weather_forecast_hour1">
 			<div class="weather_forecast_text"></div>
 			<img class="weather_forecast_img" />
@@ -74,7 +80,7 @@
 			<img class="weather_forecast_img" />
 			<div class="weather_forecast_temp"></div>
 		</div>
-		
+
 		<div class="weather_forecast weather_forecast_daily" id="weather_forecast_day1">
 			<div class="weather_forecast_text"></div>
 			<img class="weather_forecast_img" />
