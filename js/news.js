@@ -1,25 +1,29 @@
 /* global $ */
 
 var newsStarted = false;
-var newsItems = null;
+var newsItems = [];
 
 var currentItemIndex = 0;
 
 function getNews() {
-  newsItems = [];
-
   $.get('newsProxy.php', function(data) {
+    var temp = [];
+
     $(data).find('item').each(function() {
       var item = $(this);
 
       var title = item.find('title').text();
       var desc = item.find('description').text();
 
-      newsItems.push({
+      temp.push({
         'title': title,
         'desc': desc
       });
-    })
+    });
+
+    if (!!temp) {
+      newsItems = temp;
+    }
   });
 
   setTimeout(getNews, 1800000);
@@ -32,13 +36,18 @@ function showNews() {
     newsStarted = true;
   } else if (!newsItems) {
     $('#news').fadeOut();
+
+    currentItemIndex = 0;
   } else {
     var item = newsItems[currentItemIndex++ % newsItems.length];
-    var html = '<h3>' + item.title + '</h3><p>' + item.desc + '</p>';
 
-    $('#news').fadeOut('slow', function() {
-      $(this).html(html).fadeIn('slow');
-    });
+    if (!!item) {
+      var html = '<h3>' + item.title + '</h3><p>' + item.desc + '</p>';
+
+      $('#news').fadeOut('slow', function() {
+        $(this).html(html).fadeIn('slow');
+      });
+    }
 
     if (currentItemIndex >= newsItems.length) {
       currentItemIndex = 0;
