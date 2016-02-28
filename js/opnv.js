@@ -66,37 +66,43 @@ function getDepartures(station) {
     }
   } else {
     $.get('whatEFA/whatEFA.php', station, function(result) {
-      $.each(station.platforms, function(key, platform) {
-        if (platform.name in result.data.platforms) {
-          var p = {
-            name: platform.longName,
-            nextDepartureIndex: 0,
-            departures: []
-          };
+      if (result.status == 200) {
+        $.each(station.platforms, function(key, platform) {
+          if (platform.name in result.data.platforms) {
+            var p = {
+              name: platform.longName,
+              nextDepartureIndex: 0,
+              departures: []
+            };
 
-          $.each(result.data.platforms[platform.name].transitLines, function(line, lineInfo) {
-            for (var i = 0; i < lineInfo.departures.length; i++) {
-              p.departures.push({
-                time: lineInfo.departures[i],
-                line: line,
-                to: lineInfo.directionTo.replace('Braunschweig', 'BS').replace('Wolfsburg', 'WOB'),
-                from: lineInfo.directionFrom.replace('Braunschweig', 'BS').replace('Wolfsburg', 'WOB'),
-                type: lineInfo.type
-              });
-            }
-          });
+            $.each(result.data.platforms[platform.name].transitLines, function(line, lineInfo) {
+              for (var i = 0; i < lineInfo.departures.length; i++) {
+                p.departures.push({
+                  time: lineInfo.departures[i],
+                  line: line,
+                  to: lineInfo.directionTo.replace('Braunschweig', 'BS').replace('Wolfsburg', 'WOB'),
+                  from: lineInfo.directionFrom.replace('Braunschweig', 'BS').replace('Wolfsburg', 'WOB'),
+                  type: lineInfo.type
+                });
+              }
+            });
 
-          p.departures.sort(function(a, b) { return a.time - b.time; });
+            p.departures.sort(function(a, b) { return a.time - b.time; });
 
-          platformDepartures.data[platform.id] = p;
+            platformDepartures.data[platform.id] = p;
+          }
+        });
+
+        if (++platformDepartures.finished == stations.length) {
+          platformDepartures.finished = 0;
+          platformDepartures.lastUpdate = moment().unix();
+
+          updateDeparturesDisplay();
         }
-      });
-
-      if (++platformDepartures.finished == stations.length) {
-        platformDepartures.finished = 0;
-        platformDepartures.lastUpdate = moment().unix();
-
-        updateDeparturesDisplay();
+      } else {
+        setTimeout(function() {
+          getDepartures(station);
+        }, 5000);
       }
     });
   }
