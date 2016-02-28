@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="css/mirror.css" rel='stylesheet' type='text/css'>
-	<link href="css/datetime.css" rel='stylesheet' type='text/css'>
-	<link href="css/news.css" rel='stylesheet' type='text/css'>
-	<link href="css/weather.css" rel='stylesheet' type='text/css'>
-
-	<script src='js/moment-with-locales.min.js'></script>
-	<script src='js/fahrplan.js'></script>
-	<script src='js/news.js'></script>
   <meta charset="utf-8">
+
+	<link href="css/mirror.css" rel="stylesheet" type="text/css">
+	<link href="css/datetime.css" rel="stylesheet" type="text/css">
+	<link href="css/opnv.css" rel="stylesheet" type="text/css">
+	<link href="css/news.css" rel="stylesheet" type="text/css">
 	<link href="css/weather.css" rel="stylesheet" type="text/css">
+
 	<script src="js/jquery-2.2.1.min.js"></script>
+	<script src="js/moment-with-locales.min.js" charset="utf-8"></script>
 	<script src="js/weather.js"></script>
+	<script src="js/opnv.js"></script>
+	<script src="js/news.js"></script>
+
 	<script type='text/javascript'>
 		moment.locale('de');
 
@@ -52,12 +54,26 @@
 	<div id="datetime">
 		<div id="time"></div>
 		<div id="date"></div>
-		<div id="opnv">
-			<div class="haltestelle" id="bindestr_rathaus"><div>M3 <span>&#10143;</span> Rathaus</div><ul></ul></div>
-			<div class="haltestelle" id="gliesmaroderstr_uni"><div>M19 <span>&#10143;</span> Uni</div><ul></ul></div>
-			<div class="haltestelle" id="gliesmaroderstr_hbf"><div>M29 <span>&#10143;</span> Hbf</div><ul></ul></div>
-		</div>
 	</div>
+
+  <div id="opnv">
+    <div class="opnv-platform" id="opnv-platform-1">
+      <h4></h4>
+      <ul></ul>
+    </div>
+    <div class="opnv-platform" id="opnv-platform-2">
+      <h4></h4>
+      <ul></ul>
+    </div>
+    <div class="opnv-platform" id="opnv-platform-3">
+      <h4></h4>
+      <ul></ul>
+    </div>
+    <div class="opnv-platform" id="opnv-platform-4">
+      <h4></h4>
+      <ul></ul>
+    </div>
+  </div>
 
   <div id="news"></div>
 
