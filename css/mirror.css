@@ -43,12 +43,15 @@ div#news {
 div#message {
 	display: block;
 	position: absolute;
+	top: 40%;
 	left: 0;
-	top: 0;
-	bottom: 0;
-	width: 75px;
+	right: 0;
+	height: 75px;
+
 	overflow: hidden;
-	white-space: nowrap;
+
+  text-align: center;
+  white-space: nowrap;
 }
 
 div#message h1 {
@@ -57,8 +60,8 @@ div#message h1 {
 	bottom: 0;
 	height: 75px;
 	margin: auto;
-	-webkit-transform-origin:0 50%;
-	-webkit-transform:rotate(-90deg) translate(-50%, 50%);
+	/*-webkit-transform-origin:0 50%;
+	-webkit-transform:rotate(-90deg) translate(-50%, 50%);*/
 	font-family: 'Alegreya Sans' sans-serif;
 	font-weight: 300;
 	font-size: 48pt;
