@@ -9,6 +9,7 @@
 	<script src='js/moment-with-locales.min.js'></script>
 	<script src='js/fahrplan.js'></script>
 	<script src='js/news.js'></script>
+  <meta charset="utf-8">
 	<link href="css/weather.css" rel="stylesheet" type="text/css">
 	<script src="js/jquery-2.2.1.min.js"></script>
 	<script src="js/weather.js"></script>
