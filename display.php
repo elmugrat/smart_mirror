@@ -6,11 +6,11 @@
 	<link href="css/news.css" rel='stylesheet' type='text/css'>
 	<link href="css/weather.css" rel='stylesheet' type='text/css'>
 
-	<script src='js/jquery-2.1.3.min.js'></script>
 	<script src='js/moment-with-locales.min.js'></script>
 	<script src='js/forecast.io.js'></script>
 	<script src='js/fahrplan.js'></script>
 	<script src='js/news.js'></script>
+	<script src="js/jquery-2.2.1.min.js"></script>
 	<script type='text/javascript'>
 		moment.locale('de');
 
