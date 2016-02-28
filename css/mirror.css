@@ -41,7 +41,6 @@ div#news {
 }
 
 div#message {
-	display: block;
 	position: absolute;
 	top: 40%;
 	left: 0;
@@ -55,13 +54,7 @@ div#message {
 }
 
 div#message h1 {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	height: 75px;
-	margin: auto;
-	/*-webkit-transform-origin:0 50%;
-	-webkit-transform:rotate(-90deg) translate(-50%, 50%);*/
+	width: 100%;
 	font-family: 'Alegreya Sans' sans-serif;
 	font-weight: 300;
 	font-size: 48pt;
