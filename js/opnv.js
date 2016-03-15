@@ -66,7 +66,7 @@ function getDepartures(station) {
     }
   } else {
     $.get('whatEFA/whatEFA.php', station, function(result) {
-      if (result.status == 200) {
+      if (!!result && result.status == 200) {
         $.each(station.platforms, function(key, platform) {
           if (platform.name in result.data.platforms) {
             var p = {
