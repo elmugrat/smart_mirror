@@ -4,20 +4,23 @@ div#datetime {
 }
 
 div#time, div#date {
+  width: 100%;
+
 	font-family: 'Alegreya Sans' sans-serif;
 }
 
 div#time {
-	width: 100%;
 	font-size: 72pt;
 	font-weight: 300;
 	line-height: 72pt;
 }
 
 div#date {
-	margin: 10px 0 10px 0;
-	padding-top: 10px;
+  margin-top: 10px;
+	padding-top: 12px;
+
 	font-size: 16pt;
 	font-weight: 400;
+
 	border-top: 1px solid #ccc;
 }
