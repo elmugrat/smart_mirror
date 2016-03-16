@@ -83,40 +83,44 @@
 			<div id="weather_now_desc"></div>
 		</div>
 
-		<div class="weather_forecast weather_forecast_hourly" id="weather_forecast_hour1">
-			<div class="weather_forecast_text"></div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_temp"></div>
-		</div>
-		<div class="weather_forecast weather_forecast_hourly" id="weather_forecast_hour2">
-			<div class="weather_forecast_text"></div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_temp"></div>
-		</div>
-		<div class="weather_forecast weather_forecast_hourly last" id="weather_forecast_hour3">
-			<div class="weather_forecast_text"></div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_temp"></div>
-		</div>
+    <div class="weather_forecast_hourly">
+      <div class="weather_forecast" id="weather_forecast_hour1">
+        <div class="weather_forecast_text"></div>
+        <div class="weather_forecast_temp"></div>
+        <img class="weather_forecast_img" />
+      </div>
+      <div class="weather_forecast" id="weather_forecast_hour2">
+        <div class="weather_forecast_text"></div>
+        <div class="weather_forecast_temp"></div>
+        <img class="weather_forecast_img" />
+      </div>
+      <div class="weather_forecast" id="weather_forecast_hour3">
+        <div class="weather_forecast_text"></div>
+        <div class="weather_forecast_temp"></div>
+        <img class="weather_forecast_img" />
+      </div>
+    </div>
 
-		<div class="weather_forecast weather_forecast_daily" id="weather_forecast_day1">
-			<div class="weather_forecast_text"></div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_tempMin"></div>
-			<div class="weather_forecast_tempMax"></div>
-		</div>
-		<div class="weather_forecast weather_forecast_daily" id="weather_forecast_day2">
-			<div class="weather_forecast_text"></div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_tempMin"></div>
-			<div class="weather_forecast_tempMax"></div>
-		</div>
-		<div class="weather_forecast weather_forecast_daily" id="weather_forecast_day3">
-			<div class="weather_forecast_text"></div>
-			<img class="weather_forecast_img" />
-			<div class="weather_forecast_tempMin"></div>
-			<div class="weather_forecast_tempMax"></div>
-		</div>
+    <div class="weather_forecast_daily">
+      <div class="weather_forecast" id="weather_forecast_day1">
+        <div class="weather_forecast_text"></div>
+        <div class="weather_forecast_tempMax"></div>
+        <div class="weather_forecast_tempMin"></div>
+        <img class="weather_forecast_img" />
+      </div>
+      <div class="weather_forecast" id="weather_forecast_day2">
+        <div class="weather_forecast_text"></div>
+        <div class="weather_forecast_tempMax"></div>
+        <div class="weather_forecast_tempMin"></div>
+        <img class="weather_forecast_img" />
+      </div>
+      <div class="weather_forecast" id="weather_forecast_day3">
+        <div class="weather_forecast_text"></div>
+        <div class="weather_forecast_tempMax"></div>
+        <div class="weather_forecast_tempMin"></div>
+        <img class="weather_forecast_img" />
+      </div>
+    </div>
 	</div>
 </body>
 </html>
