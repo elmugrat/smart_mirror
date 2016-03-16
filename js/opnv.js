@@ -29,18 +29,19 @@ var stations = [
         longName: 'Gliesmaroder Straße &#10143; Hbf'
       }
     ]
-  }, {
-    city: 'Braunschweig',
-    stop: 'Bahnhof Gliesmarode',
-    limit: 20,
-    platforms: [
-      {
-        id: 'opnv-platform-4',
-        name: '3',
-        longName: 'Bahnhof Gliesmarode'
-      }
-    ]
   }
+  // , {
+  //   city: 'Braunschweig',
+  //   stop: 'Bahnhof Gliesmarode',
+  //   limit: 20,
+  //   platforms: [
+  //     {
+  //       id: 'opnv-platform-4',
+  //       name: '3',
+  //       longName: 'Bahnhof Gliesmarode'
+  //     }
+  //   ]
+  // }
 ];
 
 var platformDepartures = {
@@ -93,7 +94,7 @@ function getDepartures(station) {
           }
         });
 
-        if (++platformDepartures.finished == stations.length) {
+        if (++platformDepartures.finished >= stations.length) {
           platformDepartures.finished = 0;
           platformDepartures.lastUpdate = moment().unix();
 
