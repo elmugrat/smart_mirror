@@ -28,7 +28,7 @@
         localStorage["loggedWinErrors"] += err;
       }
 
-			setDateTimeee();
+			setDateTime();
 
 			setMessageText();
 
