@@ -19,7 +19,16 @@
 		moment.locale('de');
 
 		$(function() {
-			setDateTime();
+      localStorage["loggedWinErrors"] = "";
+
+      var oldError = window.onerror || function(){};
+      window.onerror = function(err, url, line){
+        oldError.call(this, err, url, line);
+        var err = "\n Error: (file: "+ url +", message: "+ err +", line: "+ line +")";
+        localStorage["loggedWinErrors"] += err;
+      }
+
+			setDateTimeee();
 
 			setMessageText();
 

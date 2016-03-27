@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Smart Mirror - Log</title>
+		<style>
+			html { background: #FAFAFE; }
+			body {
+				width: 1200px;
+				margin: 20px auto;
+				padding: 20px;
+				border: 1px solid #CCC;
+				border-radius: 5px;
+				background: #FFFFFF;
+				font-family: monospace;
+			}
+			hr {
+				display: block;
+				height: 1px;
+				border: 0;
+				border-top: 1px solid #CCC;
+			}
+		</style>
+		<script src="js/jquery-2.2.1.min.js"></script>
+		<script>
+			$(function() {
+        $('#data').text(localStorage["loggedWinErrors"] || 'No Data');
+			})
+		</script>
+	</head>
+	<body>
+		<h3>Smart Mirror Log</h3>
+		<hr>
+		<pre id="data"></pre>
+	</body>
+</html>
