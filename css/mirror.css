@@ -1,37 +1,37 @@
 @import url(https://fonts.googleapis.com/css?family=Cabin|Alegreya+Sans:400,300);
 
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 *, *:before, *:after {
-	box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 html, body {
-	background: #000000;
-	color: white;
-	font-family: 'Cabin', sans-serif;
-	font-size: 18pt;
-	font-weight: 400;
+  background: #000000;
+  color: white;
+  font-family: 'Cabin', sans-serif;
+  font-size: 18pt;
+  font-weight: 400;
   letter-spacing: .65px;
 }
 
 div#datetime {
-	position: absolute;
-	top: 0;
-	right: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 div#weather {
-	position: absolute;
-	bottom: 0;
-	right: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 div#news {
@@ -41,21 +41,21 @@ div#news {
 }
 
 div#message {
-	position: absolute;
-	top: 40%;
-	left: 0;
-	right: 0;
-	height: 75px;
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  height: 75px;
 
-	overflow: hidden;
+  overflow: hidden;
 
   text-align: center;
   white-space: nowrap;
 }
 
 div#message h1 {
-	width: 100%;
-	font-family: 'Alegreya Sans' sans-serif;
-	font-weight: 300;
-	font-size: 48pt;
+  width: 100%;
+  font-family: 'Alegreya Sans' sans-serif;
+  font-weight: 300;
+  font-size: 48pt;
 }

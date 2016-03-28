@@ -1,22 +1,22 @@
 #weather {
-	width: 270px;
+  width: 270px;
   font-size: 9pt;
 }
 
 #weather_now img {
-	width: 80px;
-	margin: 0 85px;
+  width: 80px;
+  margin: 0 85px;
 }
 
 #weather_now_desc {
-	width: 100%;
+  width: 100%;
   padding: 15px 0 20px;
-	font-size: 12pt;
+  font-size: 12pt;
   text-align: center;
 }
 
 .weather_forecast div {
-	display: inline-block;
+  display: inline-block;
 }
 
 .weather_forecast_hourly {
@@ -41,22 +41,22 @@
 .weather_forecast_temp {
   width: 39px;
   margin-right: 57px;
-	text-align: right;
+  text-align: right;
 }
 
 .weather_forecast_tempMax {
-	width: 50px;
-	text-align: right;
+  width: 50px;
+  text-align: right;
 }
 
 .weather_forecast_tempMin {
-	width: 50px;
-	font-size: 8pt;
-	color: #888;
-	text-align: left;
+  width: 50px;
+  font-size: 8pt;
+  color: #888;
+  text-align: left;
 }
 
 .weather_forecast_img {
   height: 16px;
-	margin-bottom: -3px;
+  margin-bottom: -3px;
 }

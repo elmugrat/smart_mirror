@@ -1,26 +1,26 @@
 div#datetime {
-	width: 250px;
-	text-align: center;
+  width: 250px;
+  text-align: center;
 }
 
 div#time, div#date {
   width: 100%;
 
-	font-family: 'Alegreya Sans' sans-serif;
+  font-family: 'Alegreya Sans' sans-serif;
 }
 
 div#time {
-	font-size: 72pt;
-	font-weight: 300;
-	line-height: 72pt;
+  font-size: 72pt;
+  font-weight: 300;
+  line-height: 72pt;
 }
 
 div#date {
   margin-top: 10px;
-	padding-top: 12px;
+  padding-top: 12px;
 
-	font-size: 16pt;
-	font-weight: 400;
+  font-size: 16pt;
+  font-weight: 400;
 
-	border-top: 1px solid #ddd;
+  border-top: 1px solid #ddd;
 }

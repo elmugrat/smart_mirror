@@ -7,15 +7,15 @@ div#opnv {
 }
 
 div.opnv-platform {
-	width: 100%;
-	margin-top: 8px;
-	padding-top: 8px;
+  width: 100%;
+  margin-top: 8px;
+  padding-top: 8px;
   padding-left: 5px;
 
   display: none;
 
-	font-size: 9pt;
-	text-align: left;
+  font-size: 9pt;
+  text-align: left;
 
   border-top: 1px solid #ccc;
 }
