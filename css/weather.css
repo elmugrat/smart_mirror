@@ -1,5 +1,5 @@
 #weather {
-	width: 280px;
+	width: 270px;
   font-size: 9pt;
 }
 
@@ -35,12 +35,12 @@
 }
 
 .weather_forecast_text {
-  width: 135px;
+  width: 130px;
 }
 
 .weather_forecast_temp {
   width: 39px;
-  margin-right: 61px;
+  margin-right: 57px;
 	text-align: right;
 }
 
