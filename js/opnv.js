@@ -67,7 +67,7 @@ function getDepartures(station) {
     }
   } else {
     $.get('whatEFA/whatEFA.php', station, function(result) {
-      if (!!result && result.status == 200) {
+      if (!!result && result.status === 200) {
         $.each(station.platforms, function(key, platform) {
           if (platform.name in result.data.platforms) {
             var p = {
@@ -135,7 +135,7 @@ function updateDeparturesDisplay() {
 
       var shownDepsCount = p.find('li').length;
 
-      for (var n = shownDepsCount; n < NUM_NEXT_DEPARTURES && (platform.nextDepartureIndex + n) < platform.departures.length; n++) {
+      for (var n = shownDepsCount; n < NUM_NEXT_DEPARTURES && platform.nextDepartureIndex < platform.departures.length; n++) {
         var dep = platform.departures[platform.nextDepartureIndex++];
 
         var time_str = moment.unix(dep.time).format('HH:mm');
