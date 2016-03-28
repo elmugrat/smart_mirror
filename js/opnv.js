@@ -112,38 +112,41 @@ function getDepartures(station) {
 function updateDeparturesDisplay() {
   $.each(platformDepartures.data, function(id, platform) {
     var now = moment().unix();
-    var el = $('.opnv-platform#' + id);
 
-    el.find('h4').html(platform.name);
+    // Find platform DOM object
+    var p = $('.opnv-platform#' + id);
 
-    var toRemove = el.find('li').filter(function() {
+    // Set platform title
+    p.find('h4').html(platform.name);
+
+    // Find expired departures
+    var toRemove = p.find('li').filter(function() {
       return $(this).data('time') < now;
     });
 
-    toRemove.animate({ height: 0, opacity: 0 }, function() {
-      platform.nextDepartureIndex++;
+    // Set up promise object for old departure out-animation
+    var animateOutOldDeps = function() {
+      return toRemove.animate({ height: 0, opacity: 0 });
+    };
 
-      $(this).remove();
+    // Remove all out-animated old departures and ensure NUM_NEXT_DEPARTURES departures are shown (if that many are available)
+    $.when(animateOutOldDeps()).done(function() {
+      toRemove.remove();
+
+      var shownDepsCount = p.find('li').length;
+
+      for (var n = shownDepsCount; n < NUM_NEXT_DEPARTURES && (platform.nextDepartureIndex + n) < platform.departures.length; n++) {
+        var dep = platform.departures[platform.nextDepartureIndex++];
+
+        var time_str = moment.unix(dep.time).format('HH:mm');
+
+        var depHtml = '<li data-time="'+dep.time+'">'+time_str+'<span class="opnv-line">'+dep.line+' &#10143; '+dep.to+'</span></li>';
+
+        $(depHtml).hide().appendTo(p.find('ul')).fadeIn();
+      }
     });
 
-    var lis = el.find('li');
-
-    for (var n = 0; n < NUM_NEXT_DEPARTURES + toRemove.length && (platform.nextDepartureIndex + n) < platform.departures.length; n++) {
-      var dep = platform.departures[platform.nextDepartureIndex + n];
-
-      var time_str = moment.unix(dep.time).format('HH:mm');
-      var line = dep.line + ' &#10143; ' + dep.to;
-
-      var liHtml = time_str+'<span class="opnv-line">'+line+'</span>';
-
-      if (n < lis.length) {
-        $(lis[n]).data('time', dep.time).html(liHtml);
-      } else {
-        el.find('ul').append('<li data-time="'+dep.time+'">'+liHtml+'</li>')
-      }
-    }
-
-    el.fadeIn();
+    p.fadeIn();
   });
 
   setTimeout(refreshDepartures, 30000);
