@@ -12,20 +12,20 @@ switch ($_GET['action']) {
 <html>
 <head>
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-	<title>Smart Mirror: Message</title>	
+	<title>Smart Mirror: Message</title>
 	<style type='text/css'>
 	* {
 		margin:0;
 		padding:0;
-			
+
 		box-sizing: border-box;
 		-webkit-box-sizing: border-box;
 	}
-	
+
 	html {
 	    height:100%;
 	}
-	
+
 	body {
 		background: -moz-radial-gradient(center, ellipse cover,  rgba(30,47,84,0.9) 0%, rgba(30,47,84,1) 100%);
 		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(30,47,84,0.9)), color-stop(100%,rgba(30,47,84,1)));
@@ -35,7 +35,7 @@ switch ($_GET['action']) {
 		background: radial-gradient(ellipse at center,  rgba(30,47,84,0.9) 0%,rgba(30,47,84,1) 100%);
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e61e2f54', endColorstr='#1e2f54',GradientType=1 );
 	}
-	
+
 	form {
 		position: absolute;
 		top: 50%;
@@ -57,7 +57,7 @@ switch ($_GET['action']) {
 		border-radius: 5px;
 		box-shadow: inset 0 1px 3px #CCC, 0px 0px 3px #CCC;
 	}
-	
+
 	*::-webkit-input-placeholder {
 		color: #888;
 	}
@@ -72,20 +72,20 @@ switch ($_GET['action']) {
 	*:-ms-input-placeholder {
 	    color: #888;
 	}
-	
+
 	/* Smartphones (portrait and landscape) ----------- */
 	@media only screen
-	and (min-device-width : 320px) 
+	and (min-device-width : 320px)
 	and (max-device-width : 480px) {
-		form { 
-			width: 90%; 
+		form {
+			width: 90%;
 			top: 20%;
 		}
 	}
- 
+
 	/* iPads (portrait and landscape) ----------- */
 	@media only screen
-	and (min-device-width : 768px) 
+	and (min-device-width : 768px)
 	and (max-device-width : 1024px) {
 		form { width: 70%; }
 	}
