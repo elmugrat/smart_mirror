@@ -26,6 +26,7 @@ div.opnv-platform:first-child {
 
 div.opnv-platform ul {
   margin-top: 5px;
+  height: 45px;
 }
 
 div.opnv-platform ul li {
