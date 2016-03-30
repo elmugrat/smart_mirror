@@ -1,6 +1,5 @@
 /* global moment */
 
-var NUM_PLATFORMS = 3;
 var NUM_NEXT_DEPARTURES = 3;
 
 var stations = [
@@ -95,7 +94,7 @@ function getDepartures(station) {
           }
         });
 
-        if (++platformDepartures.finished >= NUM_PLATFORMS) {
+        if (++platformDepartures.finished >= stations.length) {
           platformDepartures.finished = 0;
           platformDepartures.lastUpdate = moment().unix();
 
