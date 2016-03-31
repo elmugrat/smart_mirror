@@ -16,6 +16,18 @@
   <script src="js/news.js"></script>
 
   <script type='text/javascript'>
+    // Promise.done polyfill from https://www.promisejs.org
+    if (typeof Promise.prototype.done !== 'function') {
+      Promise.prototype.done = function (onFulfilled, onRejected) {
+        var self = arguments.length ? this.then.apply(this, arguments) : this
+        self.then(null, function (err) {
+          setTimeout(function () {
+            throw err
+          }, 0)
+        })
+      }
+    }
+
     moment.locale('de');
 
     $(function() {
@@ -32,7 +44,7 @@
 
       setMessageText();
 
-      refreshDepartures();
+      new Opnv().run();
 
       refreshWeather();
 

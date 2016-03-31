@@ -1,116 +1,120 @@
 /* global moment */
 
-var NUM_NEXT_DEPARTURES = 3;
+function Opnv() {
+  this.NUM_NEXT_DEPARTURES = 3;
 
-var stations = [
-  {
-    city: 'Braunschweig',
-    stop: 'Bindestraße',
-    limit: 20,
-    platforms: [
-      {
-        id: 'opnv-platform-1',
-        name: 'A',
-        longName: 'Bindestraße &#10143; Innenstadt'
-      }
-    ]
-  }, {
-    city: 'Braunschweig',
-    stop: 'Gliesmaroder Str',
-    limit: 40,
-    platforms: [
-      {
-        id: 'opnv-platform-2',
-        name: 'C',
-        longName: 'Gliesmaroder Straße &#10143; BS-Nord'
-      }, {
-        id: 'opnv-platform-3',
-        name: 'D',
-        longName: 'Gliesmaroder Straße &#10143; Hbf'
-      }
-    ]
-  }
-  // , {
-  //   city: 'Braunschweig',
-  //   stop: 'Bahnhof Gliesmarode',
-  //   limit: 20,
-  //   platforms: [
-  //     {
-  //       id: 'opnv-platform-4',
-  //       name: '3',
-  //       longName: 'Bahnhof Gliesmarode'
-  //     }
-  //   ]
-  // }
-];
+  this.updating = false;
 
-var platformDepartures = {
-  lastUpdate: 0,
-  finished: 0,
-  data: {}
-};
+  this.stations = [
+    {
+      city: 'Braunschweig',
+      stop: 'Bindestraße',
+      limit: 20,
+      platforms: [
+        {
+          id: 'opnv-platform-1',
+          name: 'A',
+          longName: 'Bindestraße &#10143; Innenstadt'
+        }
+      ]
+    }, {
+      city: 'Braunschweig',
+      stop: 'Gliesmaroder Str',
+      limit: 40,
+      platforms: [
+        {
+          id: 'opnv-platform-2',
+          name: 'C',
+          longName: 'Gliesmaroder Straße &#10143; BS-Nord'
+        }, {
+          id: 'opnv-platform-3',
+          name: 'D',
+          longName: 'Gliesmaroder Straße &#10143; Hbf'
+        }
+      ]
+    }
+  ];
 
-function refreshDepartures() {
-  var halfHourAgo = moment().subtract(30, 'minutes').unix();
-
-  if (!platformDepartures.lastUpdate || platformDepartures.lastUpdate < halfHourAgo) {
-    getDepartures();
-  } else {
-    updateDeparturesDisplay();
-  }
+  this.data = {};
 }
 
-function getDepartures(station) {
-  if (!station) {
-    for (var i = 0; i < stations.length; i++) {
-      getDepartures(stations[i]);
-    }
-  } else {
-    $.get('whatEFA/whatEFA.php', station, function(result) {
-      if (!!result && result.status === 200) {
-        $.each(station.platforms, function(key, platform) {
-          if (platform.name in result.data.platforms) {
-            var p = {
-              name: platform.longName,
-              nextDepartureIndex: 0,
-              departures: []
-            };
+Opnv.prototype.run = function() {
+  this.getDepartures();
 
-            $.each(result.data.platforms[platform.name].transitLines, function(line, lineInfo) {
-              for (var i = 0; i < lineInfo.departures.length; i++) {
-                p.departures.push({
-                  time: lineInfo.departures[i],
-                  line: line,
-                  to: lineInfo.directionTo.replace('Braunschweig', 'BS').replace('Wolfsburg', 'WOB'),
-                  from: lineInfo.directionFrom.replace('Braunschweig', 'BS').replace('Wolfsburg', 'WOB'),
-                  type: lineInfo.type
-                });
-              }
-            });
+  this.updateDisplay();
+}
 
-            p.departures.sort(function(a, b) { return a.time - b.time; });
+Opnv.prototype.getDepartures = function() {
+  var opnv = this;
 
-            platformDepartures.data[platform.id] = p;
-          }
-        });
+  this.getDeparturesPromise(this.stations).done(function(results) {
+    var data = {};
 
-        if (++platformDepartures.finished >= stations.length) {
-          platformDepartures.finished = 0;
-          platformDepartures.lastUpdate = moment().unix();
+    for (var i = 0; i < results.length; i++) {
+      $.each(results[i].data.platforms, function(key, platform) {
+        if (!!platform.id) {
+          var p = {
+            name: platform.longName,
+            nextDepartureIndex: 0,
+            departures: []
+          };
 
-          updateDeparturesDisplay();
+          $.each(platform.transitLines, function(line, lineInfo) {
+            var _to = lineInfo.directionTo.replace('Braunschweig', 'BS').replace('Wolfsburg', 'WOB');
+            var _from = lineInfo.directionFrom.replace('Braunschweig', 'BS').replace('Wolfsburg', 'WOB');
+
+            for (var i = 0; i < lineInfo.departures.length; i++) {
+              p.departures.push({
+                time: lineInfo.departures[i],
+                line: line,
+                to: _to,
+                from: _from,
+                type: lineInfo.type
+              });
+            }
+          });
+
+          p.departures.sort(function(a, b) { return a.time - b.time; });
+
+          data[platform.id] = p;
         }
-      } else {
-        setTimeout(function() {
-          getDepartures(station);
-        }, 5000);
+      });
+    }
+
+    opnv.updating = true;
+
+    opnv.data = data;
+
+    opnv.updating = false;
+  }, function(error) {
+    console.log("Error: " + error);
+  });
+}
+
+Opnv.prototype.getDeparturesPromise = function(stations) {
+  return Promise.all(stations.map(this.getDeparturesAjax));
+}
+
+Opnv.prototype.getDeparturesAjax = function(station) {
+  return $.getJSON('whatEFA/whatEFA.php', station, function(result) {
+    $.each(station.platforms, function(key, platform) {
+      if (platform.name in result.data.platforms) {
+        result.data.platforms[platform.name].id = platform.id;
+        result.data.platforms[platform.name].longName = platform.longName;
       }
     });
-  }
+  });
 }
 
-function updateDeparturesDisplay() {
-  $.each(platformDepartures.data, function(id, platform) {
+Opnv.prototype.updateDisplay = function() {
+  var opnv = this;
+
+  if (this.updating) {
+    setTimeout(this.refreshDepartures, 5000);
+    return;
+  }
+
+  $.each(this.data, function(id, platform) {
     var now = moment().unix();
 
     // Find platform DOM object
@@ -133,9 +137,14 @@ function updateDeparturesDisplay() {
     $.when(animateOutOldDeps()).done(function() {
       toRemove.remove();
 
+      // Fast-forward next departure pointer
+      while (platform.nextDepartureIndex < platform.departures.length && platform.departures[platform.nextDepartureIndex].time < now) {
+        platform.nextDepartureIndex++;
+      }
+
       var shownDepsCount = p.find('li').length;
 
-      for (var n = shownDepsCount; n < NUM_NEXT_DEPARTURES && platform.nextDepartureIndex < platform.departures.length; n++) {
+      for (var n = shownDepsCount; n < opnv.NUM_NEXT_DEPARTURES && platform.nextDepartureIndex < platform.departures.length; n++) {
         var dep = platform.departures[platform.nextDepartureIndex++];
 
         var time_str = moment.unix(dep.time).format('HH:mm');
@@ -149,5 +158,5 @@ function updateDeparturesDisplay() {
     p.fadeIn();
   });
 
-  setTimeout(refreshDepartures, 30000);
+  setTimeout($.proxy(this.updateDisplay, this), 30000);
 }
