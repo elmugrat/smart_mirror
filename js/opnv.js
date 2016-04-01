@@ -86,8 +86,10 @@ Opnv.prototype.getDepartures = function() {
     opnv.data = data;
 
     opnv.updating = false;
+
+    setTimeout(this.getDepartures, 1800000); // 30 mins
   }, function(error) {
-    console.log("Error: " + error);
+    setTimeout(this.getDepartures, 5000);
   });
 }
 
@@ -107,12 +109,12 @@ Opnv.prototype.getDeparturesAjax = function(station) {
 }
 
 Opnv.prototype.updateDisplay = function() {
-  var opnv = this;
-
   if (this.updating) {
     setTimeout(this.refreshDepartures, 5000);
     return;
   }
+
+  var opnv = this;
 
   $.each(this.data, function(id, platform) {
     var now = moment().unix();
