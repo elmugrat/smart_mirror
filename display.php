@@ -10,24 +10,13 @@
   <link href="css/weather.css" rel="stylesheet" type="text/css">
 
   <script src="js/jquery-2.2.1.min.js"></script>
+  <script src="js/promise-7.0.4.min.js"></script>
   <script src="js/moment-with-locales.min.js" charset="utf-8"></script>
   <script src="js/weather.js"></script>
   <script src="js/opnv.js"></script>
   <script src="js/news.js"></script>
 
   <script type='text/javascript'>
-    // Promise.done polyfill from https://www.promisejs.org
-    if (typeof Promise.prototype.done !== 'function') {
-      Promise.prototype.done = function (onFulfilled, onRejected) {
-        var self = arguments.length ? this.then.apply(this, arguments) : this
-        self.then(null, function (err) {
-          setTimeout(function () {
-            throw err
-          }, 0)
-        })
-      }
-    }
-
     moment.locale('de');
 
     $(function() {
