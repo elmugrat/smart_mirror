@@ -87,9 +87,9 @@ Opnv.prototype.getDepartures = function() {
 
     opnv.updating = false;
 
-    setTimeout(this.getDepartures, 1800000); // 30 mins
+    setTimeout($.proxy(opnv.getDepartures, opnv), 1800000); // 30 mins
   }, function(error) {
-    setTimeout(this.getDepartures, 5000);
+    setTimeout($.proxy(opnv.getDepartures, opnv), 5000);
   });
 }
 
