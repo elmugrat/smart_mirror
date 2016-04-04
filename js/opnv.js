@@ -81,11 +81,11 @@ Opnv.prototype.getDepartures = function() {
       });
     }
 
-    opnv.updating = true;
-
-    opnv.data = data;
-
-    opnv.updating = false;
+    if (opnv.updating) {
+      setTimeout(function() { opnv.data = data; }, 5000);
+    } else {
+      opnv.data = data;
+    }
 
     setTimeout($.proxy(opnv.getDepartures, opnv), 1800000); // 30 mins
   }, function(error) {
@@ -114,6 +114,8 @@ Opnv.prototype.updateDisplay = function() {
     return;
   }
 
+  this.updating = true;
+
   var opnv = this;
 
   $.each(this.data, function(id, platform) {
@@ -139,12 +141,13 @@ Opnv.prototype.updateDisplay = function() {
     $.when(animateOutOldDeps()).done(function() {
       toRemove.remove();
 
+      var shownDepsCount = p.find('li').length;
+      var minimumTimeToInsert = shownDepsCount > 0 ? p.find('li:last-child').data('time') : now;
+
       // Fast-forward next departure pointer
-      while (platform.nextDepartureIndex < platform.departures.length && platform.departures[platform.nextDepartureIndex].time < now) {
+      while (platform.nextDepartureIndex < platform.departures.length && platform.departures[platform.nextDepartureIndex].time < minimumTimeToInsert) {
         platform.nextDepartureIndex++;
       }
-
-      var shownDepsCount = p.find('li').length;
 
       for (var n = shownDepsCount; n < opnv.NUM_NEXT_DEPARTURES && platform.nextDepartureIndex < platform.departures.length; n++) {
         var dep = platform.departures[platform.nextDepartureIndex++];
@@ -159,6 +162,8 @@ Opnv.prototype.updateDisplay = function() {
 
     p.fadeIn();
   });
+
+  this.updating = false;
 
   setTimeout($.proxy(this.updateDisplay, this), 30000);
 }
