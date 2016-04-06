@@ -145,7 +145,7 @@ Opnv.prototype.updateDisplay = function() {
       var minimumTimeToInsert = shownDepsCount > 0 ? p.find('li:last-child').data('time') : now;
 
       // Fast-forward next departure pointer
-      while (platform.nextDepartureIndex < platform.departures.length && platform.departures[platform.nextDepartureIndex].time < minimumTimeToInsert) {
+      while (platform.nextDepartureIndex < platform.departures.length && platform.departures[platform.nextDepartureIndex].time <= minimumTimeToInsert) {
         platform.nextDepartureIndex++;
       }
 
