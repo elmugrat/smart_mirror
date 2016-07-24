@@ -24,11 +24,11 @@ function Opnv() {
       platforms: [
         {
           id: 'opnv-platform-2',
-          name: 'C',
+          name: 'D',
           longName: 'Gliesmaroder Straße &#10143; BS-Nord'
         }, {
           id: 'opnv-platform-3',
-          name: 'D',
+          name: 'C',
           longName: 'Gliesmaroder Straße &#10143; Hbf'
         }
       ]
