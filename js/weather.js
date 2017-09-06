@@ -1,4 +1,4 @@
-var reqUrl = 'https://api.forecast.io/forecast/';
+var reqUrl = 'https://api.darksky.net/forecast/';
 var apiKey = 'c79fedc3fbb215564811d6bd190031bb';
 var latLong_wg = '52.2753599,10.5430022';
 var opts = '?lang=de' + '&units=ca' + '&exclude[minutely,alerts,flags]';
